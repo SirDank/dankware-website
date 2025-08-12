@@ -1,0 +1,777 @@
+/*
+ * Common CSS for Dankware site
+ * Author: SirDank
+ * Version: 1.0
+ */
+
+/* ===== CSS Variables ===== */
+:root {
+    /* Color scheme */
+    --primary-color: #ff0000;
+    --secondary-color: #111;
+    --accent-color: #333;
+    --text-color: #fff;
+    --bg-color: #000;
+
+    /* Table-specific colors */
+    --table-bg: #0a0a0a;
+    --table-header-bg: #111;
+    --table-hover-bg: #222;
+    --table-border-color: rgba(255, 0, 0, 0.5);
+
+    /* Effects */
+    --glow-color: rgba(255, 0, 0, 0.7);
+}
+
+/* ===== Base Styles ===== */
+body {
+    background-color: var(--bg-color);
+    font-family: 'Source Code Pro', monospace;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+    font-size: 15px;
+}
+
+/* Common text color for form elements and table cells */
+body, label, option, select, input, th, td {
+    color: var(--text-color);
+}
+
+/* ===== Navigation ===== */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 2px 15px var(--glow-color);
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Navbar animation states */
+.navbar-hide {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.navbar-show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.navbar-brand {
+    font-family: 'Pirata One';
+    color: var(--primary-color);
+    font-size: 24px;
+    text-shadow: 0 0 10px var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.navbar-toggler {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 0, 0, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Navigation links */
+.nav-link {
+    color: var(--text-color);
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+}
+
+/* Animated underline effect */
+.nav-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 5px var(--glow-color);
+}
+
+.nav-link:hover:after,
+.nav-link.active:after {
+    width: 100%;
+}
+
+/* ===== Cards ===== */
+.card,
+.stats-card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--glow-color);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover,
+.stats-card:hover {
+    box-shadow: 0 0 25px var(--glow-color);
+    transform: translateY(-5px);
+}
+
+.card h3,
+.stats-card h3 {
+    font-family: 'Pirata One';
+    color: var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* ===== Tables ===== */
+/* Table container */
+.table-responsive {
+    margin-bottom: 50px;
+    box-shadow: 0 0 25px var(--glow-color);
+    border-radius: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling for all tables */
+    border: 2px solid var(--table-border-color);
+    padding: 0;
+    /* Ensure no responsive collapse/expand buttons */
+    display: block;
+    /* Firefox scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--table-bg);
+    /* Touch device support */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* DataTables base styles */
+table.dataTable,
+.process-table {
+    width: 100%;
+    min-width: 100%; /* Ensure tables take up at least full width */
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    table-layout: auto;
+    border: none;
+    white-space: nowrap; /* Prevent text wrapping in all tables */
+}
+
+/* Prevent DataTables from hiding columns */
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
+    display: table-cell !important;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    display: none !important;
+}
+
+/* DataTables header */
+.dataTables_scrollHead {
+    background-color: var(--table-header-bg);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.dataTables_scrollHead .dataTables_scrollHeadInner {
+    padding-right: 0;
+    width: 100%;
+}
+
+/* Horizontal scrolling - only on the table body */
+.dataTables_wrapper .dataTables_scrollBody {
+    overflow-x: auto; /* This is where the scrolling happens */
+    border-bottom: 1px solid var(--table-border-color);
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--primary-color) var(--table-bg); /* Firefox */
+    -webkit-overflow-scrolling: touch; /* Moved from .table-responsive */
+}
+
+.dataTables_wrapper {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.dataTables_scroll {
+    width: 100%;
+}
+
+/* Cell formatting */
+table.dataTable th,
+table.dataTable td,
+.process-table th,
+.process-table td {
+    white-space: nowrap; /* Prevents text wrapping */
+    min-width: 100px;
+    overflow: visible; /* Ensures content isn't truncated */
+}
+
+/* Scrollbar styling */
+.dataTables_wrapper .dataTables_scrollBody::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--bg-color);
+}
+
+.dataTables_wrapper .dataTables_scrollBody::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_scrollBody::-webkit-scrollbar-track {
+    background-color: var(--table-bg);
+    border-radius: 4px;
+}
+
+/* Table headers */
+table.dataTable thead th,
+.process-table th {
+    background-color: var(--table-header-bg);
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 2px solid var(--primary-color);
+    border-right: 1px solid var(--table-border-color);
+    padding: 15px 12px;
+    text-shadow: 0 0 5px var(--primary-color);
+    letter-spacing: 1px;
+    position: relative;
+}
+
+table.dataTable thead th:last-child,
+.process-table th:last-child {
+    border-right: none;
+}
+
+/* Table cells */
+table.dataTable tbody td,
+.process-table td {
+    background-color: var(--table-bg);
+    padding: 12px;
+    border-bottom: 1px solid var(--table-border-color);
+    border-right: 1px solid rgba(255, 0, 0, 0.2);
+    vertical-align: middle;
+    transition: all 0.2s ease;
+}
+
+table.dataTable tbody td:last-child,
+.process-table td:last-child {
+    border-right: none;
+}
+
+/* Row hover effects */
+table.dataTable tbody tr:hover td,
+.process-table tr:hover td {
+    background-color: var(--table-hover-bg);
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.1);
+}
+
+table.dataTable tbody tr:last-child td,
+.process-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* First column styling (IP addresses) */
+table.dataTable tbody td:first-child {
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: 0 0 3px rgba(255, 0, 0, 0.3);
+}
+
+/* Fix spacing between header and first row */
+table.dataTable thead + tbody tr:first-child td {
+    border-top: none;
+}
+
+/* Hide DataTables sizing row */
+table.dataTable tr[style*="height: 0px"],
+table.dataTable tr[style*="height:0px"] {
+    border: none;
+    visibility: collapse;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    opacity: 0;
+    display: none;
+    height: 0;
+}
+
+table.dataTable tr[style*="height: 0px"] th,
+table.dataTable tr[style*="height:0px"] th {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+}
+
+/* Table borders */
+.table-dark {
+    border-color: var(--table-border-color);
+}
+
+/* Sorted column styling */
+td.sorting_1 {
+    background-color: rgba(20, 20, 20, 0.8);
+}
+
+/* ===== DataTables Controls ===== */
+/* Common control styles */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
+    color: var(--text-color);
+    margin: 15px;
+    font-family: 'Source Code Pro', monospace;
+}
+
+/* Search input */
+.dataTables_wrapper .dataTables_filter input {
+    background-color: var(--bg-color);
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    margin-left: 5px;
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    border-color: var(--primary-color);
+}
+
+/* Length select */
+.dataTables_wrapper .dataTables_length select {
+    background-color: var(--bg-color);
+    border: 1px solid var(--primary-color);
+    color: var(--text-color);
+    padding: 8px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Pagination buttons */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    margin: 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.2);
+    padding: 5px 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Custom sorting icons for server-side sorting */
+.sort-icon {
+    color: var(--primary-color);
+    opacity: 0.7;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+/* Active sorting column styling */
+.sorting-active {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.sorting-active .sort-icon {
+    opacity: 1;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+/* Remove hover effects since headers are no longer clickable for sorting */
+
+/* Disable DataTables default sorting icons */
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+    display: none !important;
+}
+
+/* Table interaction */
+table.dataTable > tbody > tr {
+    cursor: default;
+}
+
+/* ===== Preloader ===== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+}
+
+.spinner,
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    box-shadow: 0 0 20px var(--glow-color);
+}
+
+/* ===== Typography ===== */
+h1, h2 {
+    font-family: 'Pirata One';
+    font-size: 100px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px var(--primary-color);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* ===== Animations ===== */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px var(--primary-color);
+    }
+    to {
+        text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 15px var(--glow-color);
+    }
+    50% {
+        box-shadow: 0 0 25px var(--glow-color);
+    }
+    100% {
+        box-shadow: 0 0 15px var(--glow-color);
+    }
+}
+
+/* ===== Back to Top Button ===== */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px var(--glow-color);
+    transition: all 0.3s ease;
+    z-index: 99;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+}
+
+#btn-back-to-top i {
+    font-size: 20px;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+#btn-back-to-top:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--glow-color);
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+#btn-back-to-top:hover i {
+    text-shadow: none;
+}
+
+/* ===== Responsive Styles ===== */
+/* Large devices (desktops, less than 1200px) */
+@media screen and (max-width: 992px) {
+    /* Navbar collapse styling */
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .nav-link {
+        padding: 10px 0;
+    }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media screen and (max-width: 768px) {
+    /* Card adjustments */
+    .stats-card {
+        margin-bottom: 15px;
+    }
+
+    /* Chart size adjustments */
+    .chart-container {
+        height: 250px;
+    }
+
+    /* Table font size */
+    .process-table,
+    table.dataTable {
+        font-size: 0.8rem;
+    }
+
+    /* Typography adjustments */
+    h1 {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+
+    /* DataTables control adjustments */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        text-align: center;
+        float: none;
+        display: block;
+        margin: 10px auto;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        width: 80%;
+        margin-left: 0;
+    }
+
+    /* Table cell padding */
+    table.dataTable {
+        font-size: 12px;
+    }
+
+    table.dataTable thead th,
+    table.dataTable tbody td {
+        padding: 8px 5px;
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media screen and (max-width: 576px) {
+    /* Container padding */
+    .container-fluid {
+        padding: 0 10px;
+    }
+
+    /* Smaller font for tables */
+    table.dataTable {
+        font-size: 10px;
+    }
+
+    /* Smaller back-to-top button */
+    #btn-back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    /* Mobile table optimizations */
+    .table-responsive {
+        max-width: 100vw; /* Prevent horizontal overflow */
+        margin-bottom: 30px;
+        overflow-x: auto; /* Enable horizontal scrolling on mobile */
+    }
+
+    /* Ensure horizontal scrolling works on mobile */
+    .dataTables_wrapper .dataTables_scrollBody {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Full width tables on mobile */
+    .dataTables_wrapper,
+    .dataTables_scroll,
+    .dataTables_scrollHead,
+    .dataTables_scrollBody {
+        max-width: 100%;
+    }
+
+    /* Smaller pagination buttons */
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 3px 8px;
+        font-size: 0.9em;
+    }
+}
+
+/* ===== Scrollbar Styling for All Tables ===== */
+/* Webkit scrollbar styles for all table containers */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--bg-color);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background-color: var(--table-bg);
+    border-radius: 4px;
+}
+
+/* ===== Custom Pagination Styling ===== */
+/* Pagination container */
+.pagination {
+    margin-top: 20px;
+}
+
+/* Pagination items */
+.page-item .page-link {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    margin: 0 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.2);
+}
+
+/* Hover state */
+.page-item .page-link:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Active state */
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Disabled state */
+.page-item.disabled .page-link {
+    background-color: var(--bg-color);
+    color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 0, 0, 0.3);
+    cursor: not-allowed;
+}
+
+/* Selector styling */
+#perPageSelect,
+#sortBySelect,
+#sortOrderSelect {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#perPageSelect:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    border-color: var(--primary-color);
+}
+
+/* Server search form styling */
+#searchForm .form-control {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px 0 0 5px;
+    padding: 8px 12px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+#searchForm .form-control:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    border-color: var(--primary-color);
+}
+
+#searchForm .btn-danger {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+#searchForm .btn-outline-danger {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+#searchForm .btn-outline-danger:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+#searchForm .input-group {
+    width: 100%;
+}
+
+/* ===== Utility Classes ===== */
+/* Fix for header alignment with body during scrolling */
+.dataTables_scrollHead,
+.dataTables_scrollHeadInner,
+.dataTables_scrollHeadInner table {
+    width: 100%;
+}
